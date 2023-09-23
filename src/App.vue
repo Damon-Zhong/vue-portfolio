@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Avatar url="https://shop7.webmodule.prestashop.net/pokedoge/11831-large_default/snorlax.jpg" :size="100" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Avatar from './components/Avatar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Avatar
   }
 }
 </script>
