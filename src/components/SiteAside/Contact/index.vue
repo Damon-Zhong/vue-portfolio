@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import Icon from "../Icon";
+import Icon from "@/components/Icon";
 
 export default {
   components: {
@@ -84,6 +84,7 @@ export default {
     display: flex;
     align-items: center;
     cursor: pointer;
+    font-size: 0.9em;
   }
 
   .icon {

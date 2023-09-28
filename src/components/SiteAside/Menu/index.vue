@@ -67,7 +67,7 @@ export default {
     }
 
     &.selected {
-      background-color: darken(@words, 5%);
+      background-color: darken(@words, 3%);
     }
   }
 }
