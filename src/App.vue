@@ -8,7 +8,8 @@
         @load="onImageLoaded"
         :duration="3000"
       /> -->
-      <Contact />
+      <!-- <Contact /> -->
+      <Menu />
     </div>
   </div>
 </template>
@@ -16,14 +17,16 @@
 import Pager from "./components/Pager";
 import Empty from "./components/Empty";
 import ImageLoader from "./components/ImageLoader";
-import Contact from "./components/Contact"
+import Contact from "./components/Contact";
+import Menu from "./components/Menu";
 
 export default {
   components: {
     Pager,
     Empty,
     ImageLoader,
-    Contact
+    Contact,
+    Menu
   },
   methods: {
     onImageLoaded() {
@@ -34,9 +37,10 @@ export default {
 </script>
 <style scoped>
 .test-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid red;
+  width: 400px;
+  height: 600px;
+  border: 2px solid red;
   background-color: #000;
+  margin: 0 auto;
 }
 </style>
