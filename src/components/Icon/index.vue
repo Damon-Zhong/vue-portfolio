@@ -14,7 +14,7 @@
       code: "iconcode",
       about: "iconset_about_hov",
       weixin: "iconweixin",
-      mail: "iconmail",
+      email: "iconemail",
       github: "icongithub",
       qq: "iconsign_qq",
       arrowUp: "iconiconfonticonfonti2copy",
@@ -39,4 +39,9 @@
   
   <style scoped>
   @import "//at.alicdn.com/t/font_2164449_nalfgtq7il.css";
+
+  .iconfont {
+    font-size: inherit;
+    color: inherit;
+  }
   </style>
