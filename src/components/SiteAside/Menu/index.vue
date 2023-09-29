@@ -1,16 +1,18 @@
 <template>
   <div class="menu-container">
-    <a
+    <RouterLink
       v-for="item in menuItems"
       :key="item.link"
-      :href="item.link"
-      :class="{ selected: isSelected(item.link, item.blurMatch) }"
+      :to="item.link"
+      :exact="item.exact"
+      active-class="selected"
+      exact-active-class=""
     >
       <div class="icon">
         <Icon :type="item.icon" />
       </div>
       <span>{{ item.title }}</span>
-    </a>
+    </RouterLink>
   </div>
 </template>
 
@@ -23,11 +25,11 @@ export default {
   data() {
     return {
       menuItems: [
-        { link: "/", title: "首页", icon: "home" },
-        { link: "/blog", title: "文章", icon: "blog", blurMatch: true },
-        { link: "/about", title: "关于我", icon: "about" },
-        { link: "/projects", title: "项目", icon: "code" },
-        { link: "/message", title: "留言板", icon: "chat" },
+        { link: "/", title: "首页", icon: "home" , exact: true},
+        { link: "/blog", title: "文章", icon: "blog", exact: false },
+        { link: "/about", title: "关于我", icon: "about", exact: true },
+        { link: "/projects", title: "项目", icon: "code", exact: true },
+        { link: "/message", title: "留言板", icon: "chat", exact: true },
       ],
     };
   },

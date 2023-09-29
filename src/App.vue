@@ -1,30 +1,41 @@
 <template>
   <div>
-    <h1>App Root 组件</h1>
-    <div class="test-container">
-      <!-- <ImageLoader
-        src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
-        placeholder="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?w=100"
-        @load="onImageLoaded"
-        :duration="3000"
-      /> -->
+    <div class="app-container">
+      <Layout>
+        <template #left>
+          <div class="site-aside">
+            <SiteAside />
+          </div>
+        </template>
+        <div class="main">
+          主区域，宽度占满剩余空间，溢出隐藏
+          <RouterView />
+        </div>
 
-      <SiteAside />
+        <template #right>
+          <div class="right">右边栏区域，宽度适应内容，溢出隐藏</div>
+        </template>
+      </Layout>
     </div>
+    <router-view />
   </div>
 </template>
 <script>
-import Pager from "./components/Pager";
-import Empty from "./components/Empty";
-import ImageLoader from "./components/ImageLoader";
-import SiteAside from "./components/SiteAside"
+import Pager from "@/components/Pager";
+import Empty from "@/components/Empty";
+import ImageLoader from "@/components/ImageLoader";
+import SiteAside from "@/components/SiteAside";
+import Modal from "@/components/Modal";
+import Layout from "@/components/Layout";
 
 export default {
   components: {
     Pager,
     Empty,
     ImageLoader,
-    SiteAside
+    SiteAside,
+    Modal,
+    Layout,
   },
   methods: {
     onImageLoaded() {
@@ -33,12 +44,15 @@ export default {
   },
 };
 </script>
-<style scoped>
-.test-container {
-  width: 400px;
-  height: 600px;
-  border: 2px solid red;
-  /* background-color: #000; */
-  margin: 0 auto;
+<style lang="less" scoped>
+@import "~@/styles/mixin.module.less";
+
+.app-container {
+  .self-fill(fixed);
+}
+
+.site-aside {
+  width: 280px;
+  height: 100%;
 }
 </style>
