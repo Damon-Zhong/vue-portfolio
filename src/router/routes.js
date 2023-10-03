@@ -12,22 +12,22 @@ export default [
     },
     {
       path: '/blog',
-      name: 'Home',
+      name: 'Blog',
       component: Blog
     },
     {
       path: '/about',
-      name: 'Home',
+      name: 'About',
       component: About
     },
     {
       path: '/projects',
-      name: 'Home',
+      name: 'Projects',
       component: Project
     },
     {
       path: '/message',
-      name: 'Home',
+      name: 'Message',
       component: Message
     }
   ]
