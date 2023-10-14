@@ -13,9 +13,10 @@
 </template>
 
 <script>
-import Avatar from "./components/Avatar.vue";
-import Icon from "./components/Icon.vue";
-import Pager from "./components/Pager.vue";
+import Avatar from "./components/Avatar";
+import Icon from "./components/Icon";
+import Pager from "./components/Pager";
+import Empty from "./components/Empty"
 
 export default {
   name: "App",
