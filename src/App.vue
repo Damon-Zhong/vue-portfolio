@@ -1,43 +1,58 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <!-- <Avatar url="https://shop7.webmodule.prestashop.net/pokedoge/11831-large_default/snorlax.jpg" :size="100" />
-    <Icon type="home" /> -->
-    <Pager
-      :total="total"
-      :current="current"
-      :visibleNumber="visibleNumber"
-      @pageChange="handlePageChange($event)"
-    />
+  <div>
+    <div class="app-container">
+      <Layout>
+        <template #left>
+          <div class="site-aside">
+            <SiteAside />
+          </div>
+        </template>
+        <div class="main">
+          主区域，宽度占满剩余空间，溢出隐藏
+          <RouterView />
+        </div>
+
+        <template #right>
+          <div class="right">右边栏区域，宽度适应内容，溢出隐藏</div>
+        </template>
+      </Layout>
+    </div>
+    <router-view />
   </div>
 </template>
-
 <script>
-import Avatar from "./components/Avatar";
-import Icon from "./components/Icon";
-import Pager from "./components/Pager";
-import Empty from "./components/Empty"
+import Pager from "@/components/Pager";
+import Empty from "@/components/Empty";
+import ImageLoader from "@/components/ImageLoader";
+import SiteAside from "@/components/SiteAside";
+import Modal from "@/components/Modal";
+import Layout from "@/components/Layout";
 
 export default {
-  name: "App",
   components: {
     Pager,
-  },
-  data() {
-    return {
-      current: 1,
-      total: 302,
-      visibleNumber: 7,
-    };
+    Empty,
+    ImageLoader,
+    SiteAside,
+    Modal,
+    Layout,
   },
   methods: {
-    handlePageChange(newPageNum) {
-      this.current = newPageNum;
-      // 加载当前页数据
+    onImageLoaded() {
+      console.log("图片加载完成");
     },
   },
 };
 </script>
-
 <style lang="less" scoped>
+@import "~@/styles/mixin.module.less";
+
+.app-container {
+  .self-fill(fixed);
+}
+
+.site-aside {
+  width: 280px;
+  height: 100%;
+}
 </style>

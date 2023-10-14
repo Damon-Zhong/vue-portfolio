@@ -1,0 +1,39 @@
+@import "../styles/mixin.module.less";
+@import "../styles/colors.module.less";
+
+.message {
+    .self-center-position();
+    z-index: 999;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 10px 20px;
+    line-height: 2;
+    display: flex;
+    align-items: center;
+    color: @white;
+    transition: 0.5s;
+    transform: translate(-50%, -50%) translateY(80%);
+    opacity: 0;
+    white-space: nowrap;
+
+    &-info {
+        background-color: @primary;
+    }
+
+    &-success {
+        background-color: @success;
+    }
+
+    &-warn {
+        background-color: @warn;
+    }
+
+    &-error {
+        background-color: @danger;
+    }
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 6px;
+}
