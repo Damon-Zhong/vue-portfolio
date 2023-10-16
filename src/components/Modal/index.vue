@@ -12,7 +12,7 @@
 export default {
   props: {
   }
-}
+} 
 </script>
 
 <style lang="less" scoped>

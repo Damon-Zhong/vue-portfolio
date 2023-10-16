@@ -3,6 +3,8 @@ import App from './App.vue'
 import './styles/global.module.less'
 import router from './router'
 import showMessage from './utils/showMessage'
+import "./mock"
+import "./api"
 
 Vue.prototype.$showMessage = showMessage
 
