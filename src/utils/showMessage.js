@@ -21,10 +21,12 @@ export default function (msgConfig = {}) {
     divEl.innerHTML = `<span class="${styles.icon}">${iconEl.outerHTML}</span><div>${content}</div>`
     divEl.className = `${styles.message} ${styles["message-" + type]}`
 
+    if(container){
         if(getComputedStyle(container).position === "static"){
             container.style.position = 'relative'
         }
-
+    }
+        
     // 插入消息元素
     container.appendChild(divEl)
 
