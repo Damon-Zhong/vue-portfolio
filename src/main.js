@@ -4,7 +4,7 @@ import './styles/global.module.less'
 import router from './router'
 import showMessage from './utils/showMessage'
 import "./mock"
-import "./api"
+// import "./api"
 
 Vue.prototype.$showMessage = showMessage
 

@@ -7,17 +7,12 @@
             <SiteAside />
           </div>
         </template>
-        <div class="main">
-          主区域，宽度占满剩余空间，溢出隐藏
-          <RouterView />
-        </div>
 
-        <template #right>
-          <div class="right">右边栏区域，宽度适应内容，溢出隐藏</div>
+        <template #default>
+          <RouterView />
         </template>
       </Layout>
     </div>
-    <router-view />
   </div>
 </template>
 <script>

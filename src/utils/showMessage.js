@@ -26,7 +26,7 @@ export default function (msgConfig = {}) {
             container.style.position = 'relative'
         }
     }
-
+        
     // 插入消息元素
     container.appendChild(divEl)
 

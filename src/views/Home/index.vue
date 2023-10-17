@@ -1,32 +1,204 @@
 <template>
-  <div class="container" v-if="banners.length > 0">
-    <ul>
+  <div class="home-container" ref="container" @wheel="handleWheel">
+    <ul
+      class="carousel-container"
+      :style="{
+        marginTop: getContainerPosition,
+      }"
+      @transitionend="handleTransitionEnd"
+    >
       <li v-for="banner in banners" :key="banner.id">
-        <img :src="banner.midImg"  />
-        <h2>{{ banner.title }}</h2>
-        <h3>{{ banner.description  }}</h3>
+        <CarouselItem />
       </li>
+    </ul>
+
+    <div v-show="currentIndex > 0" class="icon prev" @click="switchTo(currentIndex - 1)">
+      <Icon type="arrowUp" />
+    </div>
+    <div v-show="currentIndex < banners.length - 1" class="icon next" @click="switchTo(currentIndex + 1)">
+      <Icon type="arrowDown" />
+    </div>
+
+    <ul class="indicators">
+      <li
+        v-for="(banner, index) in banners"
+        :key="banner.id"
+        :class="{ active: index == currentIndex }"
+        @click="switchTo(index)"
+      ></li>
     </ul>
   </div>
 </template>
 
 <script>
-import { getBanners } from '@/api/banner'
+import { getBanners } from "@/api/banner";
+import CarouselItem from "./CarouselItem.vue";
+import Icon from "@/components/Icon";
 
 export default {
- data() {
+  components: {
+    CarouselItem,
+    Icon,
+  },
+  data() {
+    return {
+      banners: [],
+      currentIndex: 2, // 当前显示的轮播图下标
+      containerHeight: 0, // 容器高度
+      isScrolling: false // 是否正在翻页
+    };
+  },
 
-  return {
-    banners: []
-  }
- },
+  async created() {
+    this.banners = await getBanners();
+  },
+  mounted() {
+    this.containerHeight = this.$refs.container.clientHeight;
+    window.addEventListener("resize", this.handleResize)
+  },
+  destroyed(){
+    window.removeEventListener("resize", this.handleResize)
+  },
+  computed: {
+    getContainerPosition() {
+      return -this.containerHeight * this.currentIndex + "px";
+    },
+  },
+  methods: {
+    switchTo(toIndex){
+      this.currentIndex = toIndex
+    },
+    handleWheel(e){
+      console.log(e.deltaY)
+      const scrollDistance = e.deltaY
+      if(this.isScrolling){
+        return
+      }
 
- async created() {
-  this.banners = await getBanners()
- }
-}
+      if(scrollDistance < 0){
+        // 向上滚动
+        if(this.currentIndex === 0 || scrollDistance > -10){
+          return
+        }
+
+        this.currentIndex--
+        this.isScrolling = true
+      }else{
+        //向下滚动
+        if(this.currentIndex === this.banners.length - 1 || scrollDistance < 10){
+          return
+        }
+
+        this.currentIndex++
+        this.isScrolling = true
+      }
+    },
+    handleTransitionEnd(){
+      this.isScrolling = false
+    },
+    handleResize(){
+      this.containerHeight = this.$refs.container.clientHeight;
+    }
+  },
+};
 </script>
 
-<style lang>
+<style lang="less" scoped>
+@import "~@/styles/mixin.module.less";
+@import "~@/styles/colors.module.less";
 
+.home-container {
+  .fully-fill();
+  position: relative;
+  border: 3px solid green;
+  overflow: hidden;
+
+  ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+  }
+
+  .carousel-container {
+    .fully-fill();
+    transition: 0.5s;
+
+    li {
+      .fully-fill();
+    }
+  }
+
+  .icon {
+    .self-center-position();
+    font-size: 30px;
+    color: @grey;
+    cursor: pointer;
+    transform: translateX(-50%);
+    @gap: 25px;
+    @amp: 5px;
+
+    &.prev {
+      top: @gap;
+      animation: vibrate-upward 1s infinite;
+    }
+
+    &.next {
+      top: auto;
+      bottom: @gap;
+      animation: vibrate-downward 1s infinite;
+    }
+
+    @keyframes vibrate-upward {
+      0% {
+        transform: translate(-50%, @amp);
+      }
+
+      50% {
+        transform: translate(-50%, -@amp);
+      }
+
+      100% {
+        transform: translate(-50%, @amp);
+      }
+    }
+
+    @keyframes vibrate-downward {
+      0% {
+        transform: translate(-50%, -@amp);
+      }
+
+      50% {
+        transform: translate(-50%, @amp);
+      }
+
+      100% {
+        transform: translate(-50%, -@amp);
+      }
+    }
+  }
+
+  .indicators {
+    .self-center-position();
+    transform: translateY(-50%);
+    left: auto;
+    right: 20px;
+    background-color: @dark;
+
+    li {
+      width: 7px;
+      height: 7px;
+      border: 1px solid @white;
+      border-radius: 50%;
+      background-color: @words;
+      box-sizing: border-box;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: 0.5s;
+
+      &.active {
+        background-color: @white;
+      }
+    }
+  }
+}
 </style>

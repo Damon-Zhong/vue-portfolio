@@ -99,7 +99,6 @@ export default {
 }
 
 .popout {
-  border: 1px solid green;
   opacity: 1;
   position: absolute;
   bottom: 100% + 5px;

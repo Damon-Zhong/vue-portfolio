@@ -1,15 +1,13 @@
 <template>
-  <div class="layout-container">
+   <div class="layout-container">
     <div class="left">
-        <slot name="left"></slot>
+      <slot name="left"></slot>
     </div>
-    
     <div class="main">
-        <slot></slot>
+      <slot></slot>
     </div>
-
     <div class="right">
-        <slot name="right"></slot>
+      <slot name="right"></slot>
     </div>
   </div>
 </template>
@@ -34,6 +32,7 @@ export default {
     .main {
         flex: 1 1 auto;
         overflow: hidden;
+        border: 5px solid blueviolet
     }
 }
 </style>
