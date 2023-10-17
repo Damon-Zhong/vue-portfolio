@@ -8,7 +8,7 @@
       @transitionend="handleTransitionEnd"
     >
       <li v-for="banner in banners" :key="banner.id">
-        <CarouselItem />
+        <CarouselItem :carousel="banner" />
       </li>
     </ul>
 
