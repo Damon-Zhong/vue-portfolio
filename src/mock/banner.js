@@ -25,7 +25,5 @@ Mock.mock("/api/banners", "get", {
             title: "听我怒吼",
             description: "兰尼斯特有债必偿"
         }
-
-
     ]
 })

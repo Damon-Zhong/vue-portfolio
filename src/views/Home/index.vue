@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       banners: [],
-      currentIndex: 2, // 当前显示的轮播图下标
+      currentIndex: 0, // 当前显示的轮播图下标
       containerHeight: 0, // 容器高度
       isScrolling: false // 是否正在翻页
     };
@@ -110,7 +110,6 @@ export default {
 .home-container {
   .fully-fill();
   position: relative;
-  border: 3px solid green;
   overflow: hidden;
 
   ul {
@@ -182,7 +181,6 @@ export default {
     transform: translateY(-50%);
     left: auto;
     right: 20px;
-    background-color: @dark;
 
     li {
       width: 7px;
