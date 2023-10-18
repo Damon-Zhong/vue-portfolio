@@ -4,5 +4,5 @@ const Mock = require("mockjs")
 import "./banner"
 
 Mock.setup({
-    timeout: "300-600"
+    timeout: "2000-3000"
 })

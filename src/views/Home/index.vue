@@ -6,20 +6,31 @@
         marginTop: getContainerPosition,
       }"
       @transitionend="handleTransitionEnd"
+      v-if="!isLoading"
     >
       <li v-for="banner in banners" :key="banner.id">
         <CarouselItem :carousel="banner" />
       </li>
     </ul>
 
-    <div v-show="currentIndex > 0" class="icon prev" @click="switchTo(currentIndex - 1)">
+    <div
+      v-if="!isLoading"
+      v-show="currentIndex > 0"
+      class="icon prev"
+      @click="switchTo(currentIndex - 1)"
+    >
       <Icon type="arrowUp" />
     </div>
-    <div v-show="currentIndex < banners.length - 1" class="icon next" @click="switchTo(currentIndex + 1)">
+    <div
+      v-if="!isLoading"
+      v-show="currentIndex < banners.length - 1"
+      class="icon next"
+      @click="switchTo(currentIndex + 1)"
+    >
       <Icon type="arrowDown" />
     </div>
 
-    <ul class="indicators">
+    <ul v-if="!isLoading" class="indicators">
       <li
         v-for="(banner, index) in banners"
         :key="banner.id"
@@ -27,6 +38,7 @@
         @click="switchTo(index)"
       ></li>
     </ul>
+    <Loader v-if="isLoading" />
   </div>
 </template>
 
@@ -34,30 +46,34 @@
 import { getBanners } from "@/api/banner";
 import CarouselItem from "./CarouselItem.vue";
 import Icon from "@/components/Icon";
+import Loader from "@/components/Loader";
 
 export default {
   components: {
     CarouselItem,
     Icon,
+    Loader,
   },
   data() {
     return {
+      isLoading: true,
       banners: [],
       currentIndex: 0, // 当前显示的轮播图下标
       containerHeight: 0, // 容器高度
-      isScrolling: false // 是否正在翻页
+      isScrolling: false, // 是否正在翻页
     };
   },
 
   async created() {
     this.banners = await getBanners();
+    this.isLoading = false;
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
-    window.addEventListener("resize", this.handleResize)
+    window.addEventListener("resize", this.handleResize);
   },
-  destroyed(){
-    window.removeEventListener("resize", this.handleResize)
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   },
   computed: {
     getContainerPosition() {
@@ -65,40 +81,43 @@ export default {
     },
   },
   methods: {
-    switchTo(toIndex){
-      this.currentIndex = toIndex
+    switchTo(toIndex) {
+      this.currentIndex = toIndex;
     },
-    handleWheel(e){
-      console.log(e.deltaY)
-      const scrollDistance = e.deltaY
-      if(this.isScrolling){
-        return
+    handleWheel(e) {
+      console.log(e.deltaY);
+      const scrollDistance = e.deltaY;
+      if (this.isScrolling) {
+        return;
       }
 
-      if(scrollDistance < 0){
+      if (scrollDistance < 0) {
         // 向上滚动
-        if(this.currentIndex === 0 || scrollDistance > -10){
-          return
+        if (this.currentIndex === 0 || scrollDistance > -10) {
+          return;
         }
 
-        this.currentIndex--
-        this.isScrolling = true
-      }else{
+        this.currentIndex--;
+        this.isScrolling = true;
+      } else {
         //向下滚动
-        if(this.currentIndex === this.banners.length - 1 || scrollDistance < 10){
-          return
+        if (
+          this.currentIndex === this.banners.length - 1 ||
+          scrollDistance < 10
+        ) {
+          return;
         }
 
-        this.currentIndex++
-        this.isScrolling = true
+        this.currentIndex++;
+        this.isScrolling = true;
       }
     },
-    handleTransitionEnd(){
-      this.isScrolling = false
+    handleTransitionEnd() {
+      this.isScrolling = false;
     },
-    handleResize(){
+    handleResize() {
       this.containerHeight = this.$refs.container.clientHeight;
-    }
+    },
   },
 };
 </script>

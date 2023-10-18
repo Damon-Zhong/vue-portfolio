@@ -1,0 +1,35 @@
+<template>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</template>
+<script>
+export default {
+  
+}
+</script>
+
+<style lang="less" scoped>
+@import "~@/styles/mixin.module.less";
+@import "~@/styles/colors.module.less";
+.loader-container {
+  .self-center();
+}
+.loader {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-top: 2px solid @primary;
+    // transition: 1s;
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

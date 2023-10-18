@@ -36,6 +36,12 @@ export default {
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  &::-webkit-scrollbar{
+    display: none; /* Chrome, Opera, Safari */
+  }
 
   .site-title {
     font-size: 1.2em;
