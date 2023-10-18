@@ -19,7 +19,7 @@ Mock.mock("/api/banners", "get", {
             description: "如果我回头，一切都完了"
         },
         {
-            id: "1",
+            id: "3",
             midImg: "http://mdrs.yuanjin.tech/img/20201031204401.jpg",
             bigImg: "http://mdrs.yuanjin.tech/img/20201031204403.jpg",
             title: "听我怒吼",

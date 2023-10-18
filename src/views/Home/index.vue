@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
+  <div v-loading="isLoading" class="home-container" ref="container" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
@@ -38,7 +38,7 @@
         @click="switchTo(index)"
       ></li>
     </ul>
-    <Loader v-if="isLoading" />
+    <!-- <Loader v-if="isLoading" /> -->
   </div>
 </template>
 
@@ -46,13 +46,11 @@
 import { getBanners } from "@/api/banner";
 import CarouselItem from "./CarouselItem.vue";
 import Icon from "@/components/Icon";
-import Loader from "@/components/Loader";
 
 export default {
   components: {
     CarouselItem,
     Icon,
-    Loader,
   },
   data() {
     return {
