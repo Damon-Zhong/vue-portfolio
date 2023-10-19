@@ -26,7 +26,7 @@ export default {
     return {
       menuItems: [
         { link: "/", title: "首页", icon: "home" , exact: true},
-        { link: "/blog", title: "文章", icon: "blog", exact: false },
+        { link: "/articles", title: "文章", icon: "blog", exact: false },
         { link: "/about", title: "关于我", icon: "about", exact: true },
         { link: "/projects", title: "项目", icon: "code", exact: true },
         { link: "/message", title: "留言板", icon: "chat", exact: true },

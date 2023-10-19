@@ -1,13 +1,15 @@
 
-export default {
-    data(){
-        return {
-            isLoading: true,
-            fetchResult: null
-        }
-    },
-    async created(){
-        this.fetchResult = await this.fetchData()
-        this.isLoading = false
-    }  
+export default function(defaultVal = null) {
+    return {
+        data(){
+            return {
+                isLoading: true,
+                fetchResult: defaultVal
+            }
+        },
+        async created(){
+            this.fetchResult = await this.fetchData()
+            this.isLoading = false
+        }  
+    }
 }

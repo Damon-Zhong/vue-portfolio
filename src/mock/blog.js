@@ -33,7 +33,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function (options) {
             "total|500-1000": 0,
             [`rows|${limit}`]: [{
                 id: "@guid",
-                title: "@ctitle",
+                "title": "@ctitle(5, 50)",
                 description: "@cparagraph(1, 10)",
                 category: {
                     "id|1-10":0,
@@ -41,7 +41,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function (options) {
                 },
                 "scanNumber|0-1000": 0,
                 "commentNumber|0-300": 0,
-                thumb: Mock.Random.image("300x250", "#000", "#fff", "Random Image"),
+                "thumb|1": [Mock.Random.image("300x250", "#000", "#fff", "Random Image"), null],
                 createDate: "@date('yyyy-MM-dd HH:mm:ss')"
             }]
         }

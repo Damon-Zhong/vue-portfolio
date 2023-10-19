@@ -11,12 +11,6 @@
         <template #default>
           <RouterView />
         </template>
-
-        <template #right>
-          <div class="right-aside">
-            <HierarchyList :list="testlist" @onListItemClick="handleItemClick" />
-          </div>
-        </template>
       </Layout>
     </div>
   </div>
@@ -24,32 +18,14 @@
 <script>
 import SiteAside from "@/components/SiteAside";
 import Layout from "@/components/Layout";
-import HierarchyList from "@/views/Blog/components/HierarchyList";
 
 export default {
   components: {
     SiteAside,
     Layout,
-    HierarchyList,
   },
   data() {
-    return {
-      testlist: [
-        { id: "1", name: "Java", isSelect: false },
-        { id: "2", name: "Python", isSelect: true },
-        {
-          id: "3",
-          name: "Javascript",
-          isSelect: false,
-          children: [
-            { id: "3-1", name: "React", isSelect: false },
-            { id: "3-2", name: "React Native", isSelect: false },
-          ],
-        },
-        { id: "4", name: "Go", isSelect: false },
-        { id: "5", name: "React", isSelect: false },
-      ],
-    };
+    return {};
   },
   methods: {
     handleItemClick(item){
