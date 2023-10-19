@@ -20,14 +20,16 @@ const createLoader = () => {
 
 // 简化写法
 export default function(el, binding){
-    const curentLoader = isLoaderExists(el)
+    const currentLoader = isLoaderExists(el)
     if(binding.value){
-        if(!curentLoader){
+        if(!currentLoader){
            const newLoader = createLoader()
            el.appendChild(newLoader)
         }
     }else{
-        curentLoader.remove()
+        if(currentLoader){
+            currentLoader.remove()
+        }
     }
 }
 

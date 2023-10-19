@@ -8,7 +8,7 @@
       @transitionend="handleTransitionEnd"
       v-if="!isLoading"
     >
-      <li v-for="banner in banners" :key="banner.id">
+      <li v-for="banner in fetchResult" :key="banner.id">
         <CarouselItem :carousel="banner" />
       </li>
     </ul>
@@ -23,7 +23,7 @@
     </div>
     <div
       v-if="!isLoading"
-      v-show="currentIndex < banners.length - 1"
+      v-show="currentIndex < fetchResult.length - 1"
       class="icon next"
       @click="switchTo(currentIndex + 1)"
     >
@@ -32,13 +32,12 @@
 
     <ul v-if="!isLoading" class="indicators">
       <li
-        v-for="(banner, index) in banners"
+        v-for="(banner, index) in fetchResult"
         :key="banner.id"
         :class="{ active: index == currentIndex }"
         @click="switchTo(index)"
       ></li>
     </ul>
-    <!-- <Loader v-if="isLoading" /> -->
   </div>
 </template>
 
@@ -46,25 +45,20 @@
 import { getBanners } from "@/api/banner";
 import CarouselItem from "./CarouselItem.vue";
 import Icon from "@/components/Icon";
+import fetchData from "@/mixins/fetchData"
 
 export default {
+  mixins: [fetchData],
   components: {
     CarouselItem,
     Icon,
   },
   data() {
     return {
-      isLoading: true,
-      banners: [],
       currentIndex: 0, // 当前显示的轮播图下标
       containerHeight: 0, // 容器高度
       isScrolling: false, // 是否正在翻页
     };
-  },
-
-  async created() {
-    this.banners = await getBanners();
-    this.isLoading = false;
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
@@ -79,11 +73,13 @@ export default {
     },
   },
   methods: {
+    async fetchData() {
+      return await getBanners()
+    },
     switchTo(toIndex) {
       this.currentIndex = toIndex;
     },
     handleWheel(e) {
-      console.log(e.deltaY);
       const scrollDistance = e.deltaY;
       if (this.isScrolling) {
         return;
@@ -100,7 +96,7 @@ export default {
       } else {
         //向下滚动
         if (
-          this.currentIndex === this.banners.length - 1 ||
+          this.currentIndex === this.fetchResult.length - 1 ||
           scrollDistance < 10
         ) {
           return;
