@@ -1,7 +1,15 @@
 <template>
   <ul class="list-wrapper">
     <li v-for="item in list" :key="item.id">
-      <span @click="handleItemClick(item)" :class="{ active: item.isSelect }">{{ item.name }}</span>
+      <span @click="handleItemClick(item)" :class="{ active: item.isSelect }"
+        >{{ item.name }}
+        <span
+          v-if="item.suffix"
+          class="suffix"
+          :class="{ active: item.isSelect }"
+          >{{ item.suffix }}</span
+        ></span
+      >
       <HierarchyList :list="item.children" @onListItemClick="handleItemClick" />
     </li>
   </ul>
@@ -23,9 +31,9 @@ export default {
     };
   },
   methods: {
-    handleItemClick(item){
-        this.$emit("onListItemClick", item)
-    }
+    handleItemClick(item) {
+      this.$emit("onListItemClick", item);
+    },
   },
 };
 </script>
@@ -37,19 +45,21 @@ export default {
   list-style: none;
   padding: 0;
 
-  .list-wrapper{
-    margin-left: 1em;
-  }
-
-  li{
+  li {
     min-height: 40px;
     line-height: 40px;
     cursor: pointer;
+    font-size: 14px;
 
-    .active{
-        color: @warn;
-        font-weight: 700;
+    .active {
+      color: @warn;
+      font-weight: 700;
     }
   }
+}
+
+.suffix {
+  font-size: 12px;
+  color: @grey;
 }
 </style>

@@ -3,7 +3,7 @@ import Mock from "mockjs";
 Mock.mock("/api/blogtype", "get", {
     code: 0,
     msg: "",
-    "data|10-20": [
+    "data|5-10": [
         {
             "id|+1": 1,
             name: "分类@id",

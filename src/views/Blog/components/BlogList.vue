@@ -121,7 +121,6 @@ export default {
   box-sizing: border-box;
   scroll-behavior: smooth;
   padding: 20px;
-  border: 5px solid green;
 
   ul {
     list-style: none;
