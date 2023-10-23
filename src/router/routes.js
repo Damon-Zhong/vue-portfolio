@@ -3,6 +3,7 @@ import About from "@/views/About"
 import Blog from "@/views/Blog"
 import Message from "@/views/Message"
 import Project from "@/views/Project"
+import ArticleDetail from "@/views/Blog/ArticleDetail"
 
 export default [
   {
@@ -19,6 +20,11 @@ export default [
     path: "/articles/category/:categoryId", 
     name: 'CategoryBlog',
     component: Blog
+  },
+  {
+    path: "/article/:articleId", 
+    name: 'ArticleDetail',
+    component: ArticleDetail
   },
   {
     path: '/about',

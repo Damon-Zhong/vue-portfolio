@@ -7,22 +7,43 @@
         :class="{ active: true }"
       >
         <div v-if="article.thumb" class="article-thumb">
-          <img
+          <router-link :to="{
+            name: 'ArticleDetail',
+            params: {
+              articleId: article.id
+            }
+          }">
+            <img
             :src="article.thumb"
             :title="article.title"
             :alt="article.title"
           />
+          </router-link>
+         
         </div>
 
         <div class="article-main">
-          <a href="">
+          <router-link :to="{
+            name: 'ArticleDetail',
+            params: {
+              categoryId: article.id
+            }
+          }">
             <h2>{{ article.title }}</h2>
-          </a>
+          </router-link>
           <div class="article-info-container">
             <span>日期: {{ article.createDate }}</span>
             <span>浏览量: {{ article.scanNumber }}</span>
             <span>评论: {{ article.commentNumber }}</span>
-            <a href="">{{ article.category.name }}</a>
+            <router-link :to="{
+              name: 'CategoryBlog',
+              params: {
+                categoryId: article.category.id
+              }
+
+            }">
+              {{ article.category.name }}
+            </router-link>
           </div>
 
           <div class="article-description">
