@@ -50,6 +50,7 @@ export default {
     line-height: 40px;
     cursor: pointer;
     font-size: 14px;
+    margin-left: 15px;
 
     .active {
       color: @warn;

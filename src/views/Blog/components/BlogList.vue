@@ -26,7 +26,7 @@
           <router-link :to="{
             name: 'ArticleDetail',
             params: {
-              categoryId: article.id
+              articleId: article.id
             }
           }">
             <h2>{{ article.title }}</h2>
