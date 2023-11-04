@@ -20,14 +20,20 @@
     <div v-html="article.htmlContent" class="markdown-body">
 
     </div>
+
+    <MessageArea :list="[]" />
   </div>
 </template>
 
 <script>
+import MessageArea from "@/components/MessageArea"
 import "@/styles/markdown.css";
 import "highlight.js/styles/github.css";
 
 export default {
+  components: {
+    MessageArea
+  },
   props: {
     article: {
       type: Object,
