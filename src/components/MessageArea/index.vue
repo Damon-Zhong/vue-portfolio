@@ -1,6 +1,6 @@
 <template>
   <div class="message-area-container">
-    <MessageForm />
+    <MessageForm v-on="$listeners" />
     <h3>{{ title }} <span>{{ subTitle }}</span></h3>
     <MessageList :listData="list" />
     <Loader v-if="isListLoading"></Loader>
@@ -29,33 +29,7 @@ export default {
         },
         list: {
             type: Array,
-            default:() => [
-                {
-                    nickname: "abc1",
-                    content: "jdiasjdoiajsiodjaoijdsioajsoijdsao",
-                    avatar: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
-                },
-                {
-                    nickname: "abc2",
-                    content: "jdiasjdoiajsiodjaoijdsioajsoijdsao",
-                    avatar: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png"
-                },
-                {
-                    nickname: "abc3",
-                    content: "jdiasjdoiajsiodjaoijdsioajsoijdsao",
-                    avatar: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"
-                },
-                {
-                    nickname: "abc4",
-                    content: "jdiasjdoiajsiodjaoijdsioajsoijdsao",
-                    avatar: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/021.png"
-                },
-                {
-                    nickname: "abc5",
-                    content: "jdiasjdoiajsiodjaoijdsioajsoijdsao",
-                    avatar: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/104.png"
-                }
-            ]
+            default:() => []
         },
         isListLoading: {
             type: Boolean,

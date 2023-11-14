@@ -21,7 +21,7 @@ export default function (msgConfig = {}) {
     divEl.innerHTML = `<span class="${styles.icon}">${iconEl.outerHTML}</span><div>${content}</div>`
     divEl.className = `${styles.message} ${styles["message-" + type]}`
 
-    if(container){
+    if(msgConfig.container){
         if(getComputedStyle(container).position === "static"){
             container.style.position = 'relative'
         }

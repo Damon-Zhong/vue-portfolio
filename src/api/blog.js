@@ -33,5 +33,5 @@ export const getArticleComments = async (blogid, page = 1, limit = 10) => {
  * @param {*} comment nickname, content, blogId
  */
 export const submitComment = async (comment) => {
-    await instance.post("/api/comment", { ...comment })
+    return await instance.post("/api/comment", { ...comment })
 }

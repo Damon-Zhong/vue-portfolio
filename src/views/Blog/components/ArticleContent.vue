@@ -4,7 +4,7 @@
     <div class="article-info-container">
       <span>日期: {{ article.createDate }}</span>
       <span>浏览量: {{ article.scanNumber }}</span>
-      <a href="">评论: {{ article.commentNumber }}</a>
+      <a href="#message-form">评论: {{ article.commentNumber }}</a>
       <router-link
         :to="{
           name: 'CategoryBlog',

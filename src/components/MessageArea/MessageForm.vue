@@ -1,23 +1,80 @@
 <template>
-  <div class="form-container">
-    <form action="">
-      <div class="nickname-container">
-        <input type="text" maxlength="10" placeholder="用户昵称" />
-        <span class="counter-text">10/10</span>
+  <form id="message-form" ref="messageForm" @submit.prevent="handleSubmit" action="" class="form-container">
+    <div class="nickname-container">
+      <input
+        type="text"
+        v-model="formInput.nickname"
+        maxlength="10"
+        placeholder="用户昵称"
+      />
+      <span class="counter-text">{{ formInput.nickname.length }}/10</span>
+    </div>
+    <div v-show="!!errors.nickname" class="error-container">
+      {{ errors.nickname }}
+    </div>
+    <div class="content-input-container">
+      <textarea
+        name="content"
+        v-model="formInput.content"
+        rows="10"
+        maxlength="300"
+        placeholder="输入内容"
+      />
+      <span class="counter-text">{{ formInput.content.length }}/300</span>
+      <div v-show="!!errors.content" class="error-container">
+        {{ errors.content }}
       </div>
-      <div class="error-container">sjdiaodjasdjoias</div>
-      <div class="content-input-container">
-        <textarea name="content" id="" rows="10" placeholder="输入内容" />
-        <div class="error-container">sjdiaodjasdjoias</div>
-      </div>
-     
-      <button type="submit">提交</button>
-    </form>
-  </div>
+    </div>
+
+    <button :disabled="isSubmitting" type="submit">
+      {{ isSubmitting ? "提交中..." : "提交" }}
+    </button>
+  </form>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      formInput: {
+        nickname: "",
+        content: "",
+      },
+      errors: {
+        nickname: "",
+        content: "",
+      },
+      isSubmitting: false,
+    };
+  },
+  methods: {
+    handleSubmit(e) {
+      this.errors.nickname = this.formInput.nickname ? "" : "请填写昵称";
+      this.errors.content = this.formInput.content ? "" : "内容不能为空";
+
+      if (this.errors.content || this.errors.nickname) {
+        return;
+      }
+
+      this.isSubmitting = true;
+      this.$emit("submit", this.formInput, (successMsg) => {
+        this.$showMessage({
+          content: successMsg,
+          type: "success",
+          duration: 1000,
+          container: this.$refs.messageForm,
+          onAnimationFinish: () => {
+            this.formInput = {
+              nickname: "",
+              content: "",
+            };
+            this.isSubmitting = false;
+          },
+        });
+      });
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -47,7 +104,8 @@ textarea {
 }
 
 .content-input-container {
-    margin: 12px 0;
+  position: relative;
+  margin: 12px 0;
 }
 
 .counter-text {

@@ -287,7 +287,7 @@ Mock.mock(/^\/api\/blog\/[^/]+$/, "get", {
       id: "@guid",
       nickname: "@cname",
       content: "@cparagraph(1, 10)",
-      createDate: Date.now(),
+      createDate: "@date('yyyy-MM-dd HH:mm:ss')",
       "avatar|1": [
         "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png",
         "https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",
