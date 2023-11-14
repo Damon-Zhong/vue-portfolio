@@ -29,7 +29,7 @@ export default {
         },
         list: {
             type: Array,
-            default: [
+            default:() => [
                 {
                     nickname: "abc1",
                     content: "jdiasjdoiajsiodjaoijdsioajsoijdsao",

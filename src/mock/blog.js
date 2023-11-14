@@ -320,7 +320,7 @@ Mock.mock(/^\/api\/blog\/[^/]+$/, "get", {
             id: "@guid",
             nickname: "@cname",
             content: "@cparagraph(1, 10)",
-            createDate: Date.now(),
+            createDate: "@date('yyyy-MM-dd HH:mm:ss')",
             "avatar|1": [
               "https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar6.jpg",
               "https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar4.jpg",

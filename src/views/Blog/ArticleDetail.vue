@@ -2,6 +2,7 @@
   <Layout>
     <div class="article-detail-container" v-loading="isLoading">
       <ArticleContent v-if="!!fetchResult" :article="fetchResult" />
+      <ArticleComments v-if="!isLoading"  />
     </div>
     <template #right>
       <div v-loading="isLoading" class="right-container">
@@ -18,11 +19,13 @@ import { getArticleDetailById } from "@/api/blog";
 import Layout from "@/components/Layout";
 import ArticleContent from "./components/ArticleContent";
 import ArticleToc from "./components/ArticleToc";
+import ArticleComments from "./components/ArticleComments"
 
 export default {
   components: {
     Layout,
     ArticleContent,
+    ArticleComments,
     ArticleToc,
   },
   mixins: [fetchData(null)],
