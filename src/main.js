@@ -5,6 +5,7 @@ import router from './router'
 import showMessage from './utils/showMessage'
 import "./mock"
 import vLoading from "./directives/loading"
+import "./eventBus"
 
 Vue.prototype.$showMessage = showMessage
 

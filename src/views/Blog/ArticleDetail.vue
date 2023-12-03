@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="article-detail-container" v-loading="isLoading">
+    <div ref="articleMainContainer" class="article-detail-container" v-loading="isLoading">
       <ArticleContent v-if="!!fetchResult" :article="fetchResult" />
       <ArticleComments v-if="!isLoading"  />
     </div>
@@ -29,12 +29,28 @@ export default {
     ArticleToc,
   },
   mixins: [fetchData(null)],
-  created() {},
+  mounted() {
+    this.$refs.articleMainContainer.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed(){
+    this.$refs.articleMainContainer.removeEventListener('scroll', this.handleScroll)
+  },
+  updated(){
+    const hash = location.hash
+    location.hash = ""
+
+    setTimeout(() =>{
+      location.hash = hash
+    }, 80)
+  },
   methods: {
     async fetchData() {
       const articleId = this.$route.params.articleId;
       return await getArticleDetailById(articleId);
     },
+    handleScroll(){
+      this.$eventBus.$emit("mainScroll", this.$refs.articleMainContainer)
+    }
   },
 };
 </script>
