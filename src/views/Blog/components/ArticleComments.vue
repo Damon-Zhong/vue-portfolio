@@ -34,6 +34,9 @@ export default {
   created(){
     this.$eventBus.$on('mainScroll', this.handleScroll)
   },
+  destroyed(){
+    this.$eventBus.$off('mainScroll', this.handleScroll)
+  },
   methods: {
     async fetchData() {
       const articleId = this.$route.params.articleId || null;
@@ -61,7 +64,7 @@ export default {
       this.isLoading = false
     },
     async handleScroll(domEl){
-      if(this.isLoading){
+      if(this.isLoading || !domEl){
         return
       }
       const threshold = 100

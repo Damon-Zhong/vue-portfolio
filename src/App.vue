@@ -13,16 +13,19 @@
         </template>
       </Layout>
     </div>
+    <BackToTop />
   </div>
 </template>
 <script>
 import SiteAside from "@/components/SiteAside";
 import Layout from "@/components/Layout";
+import BackToTop from "@/components/BackToTop"
 
 export default {
   components: {
     SiteAside,
     Layout,
+    BackToTop
   },
   data() {
     return {};

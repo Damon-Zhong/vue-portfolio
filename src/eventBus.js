@@ -5,6 +5,11 @@ import Vue from "vue";
 * 定义：主区域滚动条位置发生变化时触发
 * 参数：
     - 滚动的dom元素 
+
+* 事件名：setMainScroll
+* 定义：需要设置主区域滚动位置时触发
+* 参数：
+    - 滚动的位置 
 */
 // const listeners = {}
 

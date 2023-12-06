@@ -70,7 +70,10 @@ export default {
       location.hash = item.anchor
     },
     // 设置activeAnchor
-    handleActiveAnchorChange() {
+    handleActiveAnchorChange(domEl) {
+      if(!domEl){
+        return
+      }
       const visibleHeight = 200;
       this.activeAnchor = "" // 重置
       // 当对应<h>元素到达视口指定位置

@@ -29,11 +29,16 @@ export default {
     ArticleToc,
   },
   mixins: [fetchData(null)],
+  created(){
+    this.$eventBus.$on("setMainScroll", this.setMainScroll)
+  },
   mounted() {
     this.$refs.articleMainContainer.addEventListener('scroll', this.handleScroll)
   },
-  destroyed(){
+  beforeDestroy(){
+    this.$eventBus.$emit("mainScroll")
     this.$refs.articleMainContainer.removeEventListener('scroll', this.handleScroll)
+    this.$eventBus.$off("setMainScroll", this.setMainScroll)
   },
   updated(){
     const hash = location.hash
@@ -50,6 +55,9 @@ export default {
     },
     handleScroll(){
       this.$eventBus.$emit("mainScroll", this.$refs.articleMainContainer)
+    },
+    setMainScroll(scrollTop){
+      this.$refs.articleMainContainer.scrollTop = scrollTop
     }
   },
 };
