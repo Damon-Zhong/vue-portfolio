@@ -23,8 +23,16 @@ export default {
   data() {
     return {
       page: 1,
-      limit: 10,
+      limit: 50,
     };
+  },
+  computed: {
+    hasMore(){
+      return this.fetchResult.rows.length < this.fetchResult.total
+    }
+  },
+  created(){
+    this.$eventBus.$on('mainScroll', this.handleScroll)
   },
   methods: {
     async fetchData() {
@@ -40,6 +48,28 @@ export default {
       this.fetchResult.rows.unshift(newComment);
       this.fetchResult.total++;
       callback("评论成功！") //调用子组件回调
+    },
+    async handleLoadMore(){
+      if(!this.hasMore){
+        return
+      }
+      this.isLoading = true
+      this.page++
+      const result = await this.fetchData()
+      this.fetchResult.total = result.total
+      this.fetchResult.rows = this.fetchResult.rows.concat(result.rows)
+      this.isLoading = false
+    },
+    async handleScroll(domEl){
+      if(this.isLoading){
+        return
+      }
+      const threshold = 100
+      const scrollDist = domEl.scrollHeight- domEl.scrollTop - domEl.clientHeight
+
+      if(scrollDist < threshold){
+        this.handleLoadMore()
+      }
     }
   },
 };
