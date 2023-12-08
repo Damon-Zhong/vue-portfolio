@@ -1,5 +1,5 @@
 import Vue from "vue";
-
+const app = new Vue({})
 /* 
 * 事件名：mainScroll
 * 定义：主区域滚动条位置发生变化时触发
@@ -47,4 +47,6 @@ import Vue from "vue";
 // })
 
 // 也可直接在Vue原型上添加
-Vue.prototype.$eventBus = new Vue({})
+Vue.prototype.$eventBus = app
+
+export default app

@@ -20,6 +20,7 @@ import Layout from "@/components/Layout";
 import ArticleContent from "./components/ArticleContent";
 import ArticleToc from "./components/ArticleToc";
 import ArticleComments from "./components/ArticleComments"
+import mainScrollEvent from "@/mixins/mainScrollEvent"
 
 export default {
   components: {
@@ -28,18 +29,7 @@ export default {
     ArticleComments,
     ArticleToc,
   },
-  mixins: [fetchData(null)],
-  created(){
-    this.$eventBus.$on("setMainScroll", this.setMainScroll)
-  },
-  mounted() {
-    this.$refs.articleMainContainer.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy(){
-    this.$eventBus.$emit("mainScroll")
-    this.$refs.articleMainContainer.removeEventListener('scroll', this.handleScroll)
-    this.$eventBus.$off("setMainScroll", this.setMainScroll)
-  },
+  mixins: [fetchData(null), mainScrollEvent("articleMainContainer")],
   updated(){
     const hash = location.hash
     location.hash = ""
@@ -53,12 +43,6 @@ export default {
       const articleId = this.$route.params.articleId;
       return await getArticleDetailById(articleId);
     },
-    handleScroll(){
-      this.$eventBus.$emit("mainScroll", this.$refs.articleMainContainer)
-    },
-    setMainScroll(scrollTop){
-      this.$refs.articleMainContainer.scrollTop = scrollTop
-    }
   },
 };
 </script>

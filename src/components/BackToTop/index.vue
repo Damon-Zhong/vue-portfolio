@@ -23,7 +23,7 @@ export default {
                 this.show = false
                 return
             }
-            const threshold = 500
+            const threshold = 200
             this.show = domEl.scrollTop > threshold
         },
         handleClick(){

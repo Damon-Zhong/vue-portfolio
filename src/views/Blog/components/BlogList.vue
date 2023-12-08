@@ -1,11 +1,7 @@
 <template>
-  <div v-loading="isLoading" ref="container" class="article-list-container">
+  <div v-loading="isLoading" ref="mainContainer" class="article-list-container">
     <ul v-if="!isLoading">
-      <li
-        v-for="article in fetchResult.rows"
-        :key="article.id"
-        :class="{ active: true }"
-      >
+      <li v-for="article in fetchResult.rows" :key="article.id" :class="{ active: true }">
         <div v-if="article.thumb" class="article-thumb">
           <router-link :to="{
             name: 'ArticleDetail',
@@ -13,13 +9,9 @@
               articleId: article.id
             }
           }">
-            <img
-            :src="article.thumb"
-            :title="article.title"
-            :alt="article.title"
-          />
+            <img v-lazy="article.thumb" :title="article.title" :alt="article.title" />
           </router-link>
-         
+
         </div>
 
         <div class="article-main">
@@ -52,13 +44,8 @@
         </div>
       </li>
     </ul>
-    <Pager
-      v-if="!isLoading && fetchResult.total"
-      :current="routeInfo.page"
-      :total="fetchResult.total"
-      :limit="routeInfo.limit"
-      @pageChange="handlePageChange"
-    />
+    <Pager v-if="!isLoading && fetchResult.total" :current="routeInfo.page" :total="fetchResult.total"
+      :limit="routeInfo.limit" @pageChange="handlePageChange" />
   </div>
 </template>
 
@@ -66,9 +53,10 @@
 import Pager from "@/components/Pager";
 import fetchData from "@/mixins/fetchData";
 import { getBlogsByPage } from "@/api/blog";
+import mainScrollEvent from "@/mixins/mainScrollEvent"
 
 export default {
-  mixins: [fetchData({})],
+  mixins: [fetchData({}), mainScrollEvent("mainContainer")],
   components: {
     Pager,
   },
@@ -99,7 +87,7 @@ export default {
     $route: {
       async handler(newVal, oldVal) {
         this.isLoading = true;
-        // this.$refs.container.scrollTop = 0
+        this.$refs.mainContainer.scrollTop = 0;
         this.fetchResult = await this.fetchData();
         this.isLoading = false;
       },
@@ -123,7 +111,7 @@ export default {
         urlStr = urlStr + `/category/${categoryId}` + queryStr;
       }
 
-      this.$router.push(urlStr).catch(() => {});
+      this.$router.push(urlStr).catch(() => { });
     },
   },
 };
@@ -141,13 +129,13 @@ export default {
   .fully-fill();
   box-sizing: border-box;
   scroll-behavior: smooth;
+  overflow-y: scroll;
   padding: 20px;
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    overflow-y: scroll;
   }
 }
 
