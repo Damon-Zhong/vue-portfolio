@@ -21,6 +21,7 @@ import ArticleContent from "./components/ArticleContent";
 import ArticleToc from "./components/ArticleToc";
 import ArticleComments from "./components/ArticleComments"
 import mainScrollEvent from "@/mixins/mainScrollEvent"
+import { tabTitleSetter } from "@/utils";
 
 export default {
   components: {
@@ -41,7 +42,11 @@ export default {
   methods: {
     async fetchData() {
       const articleId = this.$route.params.articleId;
-      return await getArticleDetailById(articleId);
+      const articleDetail = await getArticleDetailById(articleId);
+
+      tabTitleSetter.setRouteTitle(articleDetail.title)
+
+      return articleDetail
     },
   },
 };

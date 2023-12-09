@@ -9,36 +9,57 @@ export default [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      title: "Home"
+    }
   },
   {
     path: '/articles',
     name: 'Blog',
-    component: Blog
+    component: Blog,
+    meta: {
+      title: "Articles"
+    }
   },
   {
-    path: "/articles/category/:categoryId", 
+    path: "/articles/category/:categoryId",
     name: 'CategoryBlog',
-    component: Blog
+    component: Blog, 
+    meta: {
+      title: "Articles"
+    }
   },
   {
-    path: "/article/:articleId", 
+    path: "/article/:articleId",
     name: 'ArticleDetail',
-    component: ArticleDetail
+    component: ArticleDetail,
+    meta: {
+      title: "Article detail"
+    }
   },
   {
     path: '/about',
     name: 'About',
-    component: About
+    component: About,
+    meta: {
+      title: "About me"
+    }
   },
   {
     path: '/projects',
     name: 'Projects',
-    component: Project
+    component: Project,
+    meta: {
+      title: "Project Gallery"
+    }
   },
   {
     path: '/message',
     name: 'Message',
-    component: Message
+    component: Message,
+    meta: {
+      title: "Contact me"
+    }
   }
 ]
