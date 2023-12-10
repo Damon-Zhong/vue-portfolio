@@ -18,6 +18,7 @@
 
 <script>
 import Icon from "@/components/Icon";
+import { mapState } from "vuex";
 export default {
   components: {
     Icon,
@@ -32,6 +33,9 @@ export default {
         { link: "/message", title: "留言板", icon: "chat", exact: true },
       ],
     };
+  },
+  computed: {
+    ...mapState("setting", ["isLoading", "settingData"])
   },
   methods: {
     isSelected(path, blurMatch) {

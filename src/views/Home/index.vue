@@ -8,7 +8,7 @@
       @transitionend="handleTransitionEnd"
       v-if="!isLoading"
     >
-      <li v-for="banner in fetchResult" :key="banner.id">
+      <li v-for="banner in bannerData" :key="banner.id">
         <CarouselItem :carousel="banner" />
       </li>
     </ul>
@@ -23,7 +23,7 @@
     </div>
     <div
       v-if="!isLoading"
-      v-show="currentIndex < fetchResult.length - 1"
+      v-show="currentIndex < bannerData.length - 1"
       class="icon next"
       @click="switchTo(currentIndex + 1)"
     >
@@ -32,7 +32,7 @@
 
     <ul v-if="!isLoading" class="indicators">
       <li
-        v-for="(banner, index) in fetchResult"
+        v-for="(banner, index) in bannerData"
         :key="banner.id"
         :class="{ active: index == currentIndex }"
         @click="switchTo(index)"
@@ -42,13 +42,14 @@
 </template>
 
 <script>
-import { getBanners } from "@/api/banner";
+// import { getBanners } from "@/api/banner";
 import CarouselItem from "./CarouselItem.vue";
 import Icon from "@/components/Icon";
-import fetchData from "@/mixins/fetchData"
+// import fetchData from "@/mixins/fetchData"
+import { mapState } from "vuex";
 
 export default {
-  mixins: [fetchData([])],
+  // mixins: [fetchData([])],
   components: {
     CarouselItem,
     Icon,
@@ -59,6 +60,9 @@ export default {
       containerHeight: 0, // 容器高度
       isScrolling: false, // 是否正在翻页
     };
+  },
+  created(){
+    this.$store.dispatch("banner/fetchBanner")
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
@@ -71,11 +75,12 @@ export default {
     getContainerPosition() {
       return -this.containerHeight * this.currentIndex + "px";
     },
+    ...mapState("banner", ["loading", "bannerData"])
   },
   methods: {
-    async fetchData() {
-      return await getBanners()
-    },
+    // async fetchData() {
+    //   return await getBanners()
+    // },
     switchTo(toIndex) {
       this.currentIndex = toIndex;
     },
@@ -96,7 +101,7 @@ export default {
       } else {
         //向下滚动
         if (
-          this.currentIndex === this.fetchResult.length - 1 ||
+          this.currentIndex === this.bannerData.length - 1 ||
           scrollDistance < 10
         ) {
           return;

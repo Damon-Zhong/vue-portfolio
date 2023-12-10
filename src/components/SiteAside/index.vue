@@ -3,7 +3,7 @@
     <Avatar
       url="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
     />
-    <h1 class="site-title">纳克萨玛斯</h1>
+    <h1 class="site-title">{{ settingData?.siteTitle ?? "纳克萨玛斯"}}</h1>
     <Menu />
     <Contact />
     <p class="copyright">
@@ -16,12 +16,16 @@
 import Avatar from "@/components/Avatar";
 import Menu from "./Menu";
 import Contact from "./Contact";
+import { mapState } from "vuex";
 
 export default {
   components: {
     Avatar,
     Menu,
     Contact,
+  },
+  computed: {
+    ...mapState("setting", ["settingData"])
   },
 };
 </script>

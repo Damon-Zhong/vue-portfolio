@@ -5,6 +5,9 @@ import router from './router'
 import showMessage from './utils/showMessage'
 import "./mock"
 import "./eventBus"
+import store from './store'
+
+store.dispatch("setting/fetchSettings")
 
 // Directives
 import vLoading from "./directives/loading"
@@ -17,6 +20,7 @@ Vue.directive("lazy", vLazy)
  
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
 
