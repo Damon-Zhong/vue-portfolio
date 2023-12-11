@@ -1,5 +1,5 @@
 import { getGlobalSettings } from "@/api/setting";
-
+import { tabTitleSetter } from "@/utils";
 export default {
     namespaced: true,
     state:{
@@ -23,6 +23,10 @@ export default {
             const res = await getGlobalSettings()
             ctx.commit("setGlobalSetting", res)
             ctx.commit("setLoading", false)
+
+            if(res.siteTitle){
+                tabTitleSetter.setSiteTitle(res.siteTitle)
+            }
         }
     }
 }

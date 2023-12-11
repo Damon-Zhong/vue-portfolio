@@ -1,7 +1,7 @@
 <template>
   <div class="site-aside-container">
     <Avatar
-      url="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
+      url="https://assets.pokemon.com/assets/cms2/img/pokedex/full/830.png"
     />
     <h1 class="site-title">{{ settingData?.siteTitle ?? "纳克萨玛斯"}}</h1>
     <Menu />
